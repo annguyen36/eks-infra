@@ -21,7 +21,7 @@ export class ReDeployUsEast2Stack extends cdk.Stack {
       }),
     });
 
-  //   const deploy = new EksDeployStage(this, "Deploy");
-  //   const deployStage = pipeline.addStage(deploy);
+    const deploy = new EksDeployStage(this, "Deploy");
+    const deployStage = pipeline.addStage(deploy);
   }
 }

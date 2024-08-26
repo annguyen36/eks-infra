@@ -6,7 +6,7 @@ export class EksDeployStage extends Stage {
   constructor(scope: Construct, id: string, props?: StageProps) {
     super(scope, id, props);
 
-    const service = new InfraStack2(this, "EKS-infra");
+    const cluster = new InfraStack2(this, "InfraStack2");
   }
 
 }
