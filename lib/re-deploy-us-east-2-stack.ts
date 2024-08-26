@@ -1,16 +1,27 @@
 import * as cdk from 'aws-cdk-lib';
+import { Repository } from "aws-cdk-lib/aws-codecommit";
 import { Construct } from 'constructs';
-// import * as sqs from 'aws-cdk-lib/aws-sqs';
+import { CodeBuildStep, CodePipeline, CodePipelineSource } from "aws-cdk-lib/pipelines";
+import { EksDeployStage } from "./eks-deploy-stage";
 
 export class ReDeployUsEast2Stack extends cdk.Stack {
   constructor(scope: Construct, id: string, props?: cdk.StackProps) {
     super(scope, id, props);
 
-    // The code that defines your stack goes here
-
-    // example resource
-    // const queue = new sqs.Queue(this, 'ReDeployUsEast2Queue', {
-    //   visibilityTimeout: cdk.Duration.seconds(300)
+    // CC deprecated -- use GitHub
+    // const repo = new Repository(this, "WorkshopRepo", {
+    //   repositoryName: "eks-flux-repo",
     // });
+
+    const pipeline = new CodePipeline(this, "Pipeline", {
+      pipelineName: "eks-flux-pipeline",
+      synth: new CodeBuildStep("SynthStep", {
+        input: CodePipelineSource.gitHub('annguyen36/eks-infra', "main"),
+        commands: ["npm ci", "npm run build", "npx cdk synth"],
+      }),
+    });
+
+  //   const deploy = new EksDeployStage(this, "Deploy");
+  //   const deployStage = pipeline.addStage(deploy);
   }
 }
