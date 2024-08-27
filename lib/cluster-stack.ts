@@ -6,7 +6,7 @@ import { ClusterAutoscaler } from './addons/cluster-autoscaler';
 import { FluxV2 } from './addons/fluxv2';
 import { AWSLoadBalancerController } from './addons/aws-lbc';
 
-export class InfraStack2 extends Stack {
+export class ClusterStack extends Stack {
   constructor(scope: Construct, id: string, props?: StackProps) {
     super(scope, id, props);
 

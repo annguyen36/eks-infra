@@ -1,4 +1,4 @@
-import { InfraStack2 } from './infra-stack';
+import { ClusterStack } from './cluster-stack';
 import { Stage, StageProps } from 'aws-cdk-lib';
 import { Construct } from 'constructs';
 
@@ -6,7 +6,7 @@ export class EksDeployStage extends Stage {
   constructor(scope: Construct, id: string, props?: StageProps) {
     super(scope, id, props);
 
-    const cluster = new InfraStack2(this, "InfraStack2");
+    const cluster = new ClusterStack(this, "Cluster");
   }
 
 }

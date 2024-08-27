@@ -4,7 +4,7 @@ import { Construct } from 'constructs';
 import { CodeBuildStep, CodePipeline, CodePipelineSource } from "aws-cdk-lib/pipelines";
 import { EksDeployStage } from "./eks-deploy-stage";
 
-export class ReDeployUsEast2Stack extends cdk.Stack {
+export class CDKInfraStack extends cdk.Stack {
   constructor(scope: Construct, id: string, props?: cdk.StackProps) {
     super(scope, id, props);
 
@@ -21,7 +21,7 @@ export class ReDeployUsEast2Stack extends cdk.Stack {
       }),
     });
 
-    const deploy = new EksDeployStage(this, "Deploy");
+    const deploy = new EksDeployStage(this, "EksDeploy");
     const deployStage = pipeline.addStage(deploy);
   }
 }
